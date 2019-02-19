@@ -5,14 +5,26 @@ import java.io.FilenameFilter;
 
 public class MyFilter1 implements FilenameFilter{
 
+	private String filtre;
+	
+	public MyFilter1(String filter) {
+		this.filtre = filter;
+	}
+	
 	@Override
 	public boolean accept(File dir, String name) {
-		if(dir.toString().contains(name)) { 
-			dir.co
+		if(new File(dir, name).isDirectory()) {
+			
 			return true;
-		}else{
-			return false;
 		}
+		if (name.endsWith(filtre)) {
+			System.out.println(dir+name);
+			return true;
+		}
+		
+		return false;
 	}
+	
+	
 
 }

@@ -12,18 +12,16 @@ public class ListerFiltre1{
 	public ListerFiltre1(String chemin) {
 		super();
 		f = new File(chemin);
-		filter = new MyFilter1();
+		filter = new MyFilter1(".java");
 		lister(f);
 	}
 	
 	public void lister(File pa) {
-		liste = pa.listFiles();
+		liste = pa.listFiles(filter);
 		for(File path:liste) {
-			if(filter.accept(path, ".java")) {
+			if(path.isDirectory()) {
 				System.out.println(path);
-				if(path.isDirectory()) {
-					lister(path);
-				}
+				lister(path);
 			}
 		}
 	}
